@@ -1,6 +1,7 @@
-import { Context, h } from 'koishi'
-import { Config } from './index'
-import { ShellType, shellInfos, renderShotgunImage } from './renderer'
+import { Context, h } from 'koishi';
+import { Config } from './index';
+import { ShellType, shellInfos, renderShotgunImage } from './renderer';
+import { shuffleArray } from './utils';
 
 const storedBullets = new Map<string, ShellType[]>();
 const lastCommandTime = new Map<string, number>();
@@ -52,7 +53,20 @@ export function registerShotgunCommand(ctx: Context, config: Config) {
         if (!currentBullets || currentBullets.length === 0) {
           const bullets: ShellType[] = [];
           for (let i = 0; i < bulletCount; i++) {
-            bullets.push(Math.floor(Math.random() * 4) + 1 as ShellType);
+            const random = Math.random();
+            let shellType: ShellType;
+            
+            if (random < config.shotGunRealShotChance) {
+              shellType = ShellType.SHELL_REAL;
+            } else if (random < config.shotGunRealShotChance + config.shotGunExplodeShotChance) {
+              shellType = ShellType.SHELL_BOMB;
+            } else if (random < config.shotGunRealShotChance + config.shotGunExplodeShotChance + config.shotGunMilkShotChance) {
+              shellType = ShellType.SHELL_MILK;
+            } else {
+              shellType = ShellType.SHELL_DUMMY;
+            }
+            
+            bullets.push(shellType);
           }
 
           const dummyCount = bullets.filter(b => b === ShellType.SHELL_DUMMY).length;
@@ -73,9 +87,8 @@ export function registerShotgunCommand(ctx: Context, config: Config) {
           tempMsg += `将随机插入${insertCount}颗弹药`;
 
           const bulletsToInsert = bullets.slice(0, insertCount);
-          storedBullets.set(key, bulletsToInsert);
-
           image = await renderShotgunImage(bulletsToInsert);
+          storedBullets.set(key, shuffleArray(bulletsToInsert));
           temp = tempMsg;
         } else {
           const result = currentBullets[0];
