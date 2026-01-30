@@ -32,6 +32,7 @@ export function registerShotgunCommand(ctx: Context, config: Config) {
         bulletCount = Math.max(0, Math.min(config.shotGunMaxBullet, bullet));
       } else {
         bulletCount = Math.floor(Math.random() * 7) + 6;
+        bulletCount = Math.max(1, Math.min(config.shotGunMaxBullet, bulletCount));
       }
 
       let temp: string;
