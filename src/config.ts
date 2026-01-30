@@ -2,7 +2,6 @@ import { Schema } from 'koishi'
 
 export interface Config {
   sixRoundMuteTime: number,
-  sixRoundCleanTime: number,
 
   shotGunMuteTime: number,
   shotGunCleanTime: number,
@@ -13,7 +12,6 @@ export interface Config {
 }
 
 export const Config: Schema<Config> = Schema.object({
-  sixRoundClean: Schema.number().default(300).description("俄罗斯轮盘清理时间，单位秒"),
   sixRoundMuteTime: Schema.number().default(60).description("俄罗斯轮盘每颗子弹静音时间，单位秒"),
 
   shotGunMuteTime: Schema.number().default(20).description("恶魔霰弹静音时间，单位秒"),
