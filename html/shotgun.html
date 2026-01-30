@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+
+<head>
+    <style type="text/css">
+        :root {
+            --width: 640px;
+        }
+
+        body {
+            width: var(--width);
+            height: 300px;
+        }
+
+        #shotgun {
+            position: relative;
+            width: var(--width);
+            height: 300px;
+            overflow: hidden;
+            background-image: url("img/shotgun/shot_bg.jpg");
+            background-size: 100%;
+            background-repeat: no-repeat;
+        }
+
+        #display {
+            width: var(--width);
+            height: 150px;
+            bottom: 0;
+            position: absolute;
+            display: flex;
+        }
+
+        .mini_bullet {
+            margin-left: 7px;
+            position: relative;
+            height: 120px;
+            width: 45px;
+        }
+        div[type="4"] {
+            background-image: url("img/shotgun/shell4.jpg");
+        }
+        div[type="3"] {
+            background-image: url("img/shotgun/shell3.jpg");
+        }
+        div[type="2"] {
+            background-image: url("img/shotgun/shell2.jpg");
+        }
+        div[type="1"] {
+            background-image: url("img/shotgun/shell1.jpg");
+        }
+        div[type="0"] {
+            visibility: hidden;
+            
+        }
+    </style>
+</head>
+<body>
+    <div id="shotgun">
+        <div id="display">
+            <div id="b0" class="mini_bullet" type="0"></div>
+            <div id="b1" class="mini_bullet" type="0"></div>
+            <div id="b2" class="mini_bullet" type="0"></div>
+            <div id="b3" class="mini_bullet" type="0"></div>
+            <div id="b4" class="mini_bullet" type="0"></div>
+            <div id="b5" class="mini_bullet" type="0"></div>
+            <div id="b6" class="mini_bullet" type="0"></div>
+            <div id="b7" class="mini_bullet" type="0"></div>
+            <div id="b8" class="mini_bullet" type="0"></div>
+            <div id="b9" class="mini_bullet" type="0"></div>
+            <div id="b10" class="mini_bullet" type="0"></div>
+            <div id="b11" class="mini_bullet" type="0"></div>
+        </div>
+    </div>
+
+    
+</body>
+<footer>
+    <script>
+        let shells = {{SHELL}};
+        shells.sort();
+        for (let i = 0; i < shells.length; i++) {
+            let s = document.getElementById("b" + i);
+            s.setAttribute("type", shells[i]);
+        }
+    </script>
+</footer>

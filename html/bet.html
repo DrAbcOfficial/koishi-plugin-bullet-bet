@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+
+<head>
+    <style type="text/css">
+        body {
+            width: 300px;
+            height: 300px;
+        }
+
+        .bullet {
+            background-image: url("img/bet/rounds.png");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 100%;
+            position: absolute;
+            width: 70px;
+            height: 70px;
+        }
+
+        #clip {
+            position: relative;
+            background-image: url("img/bet/357.jpg");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 100%;
+            width: 300px;
+            height: 300px;
+        }
+
+        #b1 {
+            left: 75px;
+            top: 33px;
+        }
+
+        #b2 {
+            left: 167px;
+            top: 33px;
+        }
+
+        #b3 {
+            left: 217px;
+            top: 120px;
+        }
+
+        #b4 {
+            left: 170px;
+            top: 201px;
+        }
+
+        #b5 {
+            left: 75px;
+            top: 201px;
+        }
+
+        #b6 {
+            left: 27px;
+            top: 120px;
+        }
+
+        div[type="0"] {
+            display: none;
+        }
+
+        div[type="2"] {
+            background-image: url("img/bet/hits.png");
+            width: 100px;
+            height: 100px;
+            translate: -15px -15px;
+            position: absolute;
+        }
+
+        div[type="3"] {
+            background-image: url("img/bet/hollow.png");
+            width: 100px;
+            height: 100px;
+            translate: -15px -15px;
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="clip">
+        <div>
+            <div id="b1" class="bullet" type="1"></div>
+            <div id="b2" class="bullet" type="1"></div>
+            <div id="b3" class="bullet" type="1"></div>
+            <div id="b4" class="bullet" type="1"></div>
+            <div id="b5" class="bullet" type="1"></div>
+            <div id="b6" class="bullet" type="1"></div>
+        </div>
+    </div>
+</body>
+<footer>
+    <script>
+        let bullets = {{BULLET}};
+        let chose = {{CHOSE}};
+        for (let i = 0; i < 6; i++) {
+            let b = document.getElementById("b" + (i + 1));
+            switch (bullets[i]) {
+                case 0: b.setAttribute("type", "0"); break;
+                case 1: break;
+                case 2: b.setAttribute("type", "2"); break;
+            }
+        }
+        if (bullets[chose] == 0) {
+            document.getElementById("b" + (chose + 1)).setAttribute("type", "3");
+        }
+    </script>
+</footer>

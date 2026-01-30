@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<head>
+    <style type="text/css">
+        :root {
+            --width: 640px;
+        }
+
+        body {
+            width: var(--width);
+            height: 300px;
+        }
+        #shotgun {
+            z-index: 0;
+            position: relative;
+            width: var(--width);
+            height: 300px;
+            overflow: hidden;
+            background-image: url("img/shotgun/shot_{{SHOT_TYPE}}.jpg");
+            background-size: 100%;
+            background-repeat: no-repeat;
+        }
+        #avatar{
+            position: absolute;
+            width: 180px;
+            height: 180px;
+            bottom: 33px;
+            right: 33px;
+            z-index: 10;
+            visibility: {{AVATAR_VISIBILITY}};
+        }
+        #splash{
+            z-index: 11;
+            width: 180px;
+            height: 180px;
+        }
+    </style>
+</head>
+<body>
+    <div id="shotgun">
+        <div id="avatar">
+            <image id="splash" src="img/shotgun/splash.png">
+            <image id="avatar_img" src="{{AVATAR}}">
+        </div>
+    </div> 
+</body>
