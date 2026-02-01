@@ -14,13 +14,11 @@ export async function renderBulletImage(puppeteer: Puppeteer, bulletStr: string,
 
   const tempFileUrl = 'file://' + tempHtmlPath.replace(/\\/g, '/');
   const page = await  puppeteer.browser.newPage();
-  const viewport = page.viewport();
-  viewport.width = 320;
-  viewport.height = 320;
+  page.setViewport({width: 320, height: 320});
   await page.goto(tempFileUrl);
   await page.waitForNetworkIdle();
   const screenshot = await page.screenshot({ type: 'png' });
-  await puppeteer.browser.close();
+  await page.close();
 
   unlinkSync(tempHtmlPath);
 
@@ -69,14 +67,12 @@ export async function renderShotgunImage(puppeteer: Puppeteer, shells: ShellType
   const tempFileUrl = 'file://' + tempHtmlPath.replace(/\\/g, '/');
 
   const page = await  puppeteer.browser.newPage();
-  const viewport = page.viewport();
-  viewport.width = 640;
-  viewport.height = 300;
+  page.setViewport({width:640, height:300});
   await page.goto(tempFileUrl);
   await page.waitForNetworkIdle();
 
   const screenshot = await page.screenshot({ type: 'png' });
-  await puppeteer.browser.close();
+  await page.close();
 
   unlinkSync(tempHtmlPath);
 
