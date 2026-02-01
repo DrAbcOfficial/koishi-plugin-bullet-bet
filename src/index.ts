@@ -15,6 +15,7 @@ export interface Config {
   shotGunMilkShotChance: number,
   shotGunMaxBullet: number,
   shotGunExplodeMuteTime: number,
+  shotGunSharedState: boolean,
 }
 
 export const Config: Schema<Config> = Schema.object({
@@ -30,6 +31,8 @@ export const Config: Schema<Config> = Schema.object({
   shotGunMilkShotChance: Schema.number().default(0.5).min(0.0).max(1.0).role("slider").step(0.01).description("恶魔霰弹牛奶弹概率"),
 
   shotGunMaxBullet: Schema.number().default(6).max(12).min(1).role("slider").description("恶魔霰弹最大子弹数"),
+
+  shotGunSharedState: Schema.boolean().default(true).description("恶魔霰弹是否共享状态（true为群内共享，false为用户独立）"),
 });
 
 export function apply(ctx: Context, config: Config) {

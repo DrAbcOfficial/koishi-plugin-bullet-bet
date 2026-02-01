@@ -14,7 +14,7 @@ export function registerShotgunCommand(ctx: Context, config: Config) {
         return '此命令只能在群组中使用！';
       }
 
-      const key = `${session.guildId}-${session.userId}`;
+      const key = config.shotGunSharedState ? session.guildId : `${session.guildId}-${session.userId}`;
       const now = Date.now();
       const lastTime = lastCommandTime.get(key) || 0;
       
