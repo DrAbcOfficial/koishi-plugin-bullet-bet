@@ -30,7 +30,7 @@ export function registerSixRoundCommand(ctx: Context, config: Config) {
       }
 
       const bulletStr = '[' + shuffledBullets.join(',') + ']';
-      const image = await renderBulletImage(bulletStr, test);
+      const image = await renderBulletImage(ctx.puppeteer, bulletStr, test);
 
       let temp: string;
       if (bulletCount === 0) {

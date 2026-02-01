@@ -87,7 +87,7 @@ export function registerShotgunCommand(ctx: Context, config: Config) {
           tempMsg += `将随机插入${insertCount}颗弹药`;
 
           const bulletsToInsert = bullets.slice(0, insertCount);
-          image = await renderShotgunImage(bulletsToInsert);
+          image = await renderShotgunImage(ctx.puppeteer, bulletsToInsert);
           storedBullets.set(key, shuffleArray(bulletsToInsert));
           temp = tempMsg;
         } else {
@@ -105,7 +105,7 @@ export function registerShotgunCommand(ctx: Context, config: Config) {
             temp += '枪内没有子弹了，本轮游戏结束';
           }
           pickedShell = result;
-          image = await renderShotgunImage([result], session.author.avatar, true);
+          image = await renderShotgunImage(ctx.puppeteer, [result], session.author.avatar, true);
         }
       }
 
