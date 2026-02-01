@@ -3,6 +3,7 @@ import { registerSixRoundCommand } from './six-round'
 import { registerShotgunCommand } from './shotgun'
 
 export const name = 'bullet-bet'
+export const using = ['puppeteer'] as const
 
 export interface Config {
   sixRoundMuteTime: number,

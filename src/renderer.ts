@@ -1,8 +1,8 @@
-import { firefox } from 'playwright'
 import { readFileSync, writeFileSync, unlinkSync } from 'fs'
 import { join } from 'path'
+import Puppeteer from 'koishi-plugin-puppeteer'
 
-export async function renderBulletImage(bulletStr: string, chose: number): Promise<Buffer> {
+export async function renderBulletImage(puppeteer: Puppeteer, bulletStr: string, chose: number): Promise<Buffer> {
   const htmlPath = join(__dirname, '..', 'html', 'bet.html');
   let htmlContent = readFileSync(htmlPath, 'utf-8');
 
@@ -13,16 +13,14 @@ export async function renderBulletImage(bulletStr: string, chose: number): Promi
   writeFileSync(tempHtmlPath, htmlContent);
 
   const tempFileUrl = 'file://' + tempHtmlPath.replace(/\\/g, '/');
-
-  const browser = await firefox.launch({ headless: true });
-  const page = await browser.newPage();
-  await page.setViewportSize({ width: 320, height: 320 });
-
+  const page = await  puppeteer.browser.newPage();
+  const viewport = page.viewport();
+  viewport.width = 320;
+  viewport.height = 320;
   await page.goto(tempFileUrl);
-  await page.waitForLoadState('networkidle');
-
+  await page.waitForNetworkIdle();
   const screenshot = await page.screenshot({ type: 'png' });
-  await browser.close();
+  await puppeteer.browser.close();
 
   unlinkSync(tempHtmlPath);
 
@@ -51,7 +49,7 @@ export const shellInfos: ShellInfo[] = [
   { name: '牛奶弹', resultMessage: '牛奶弹，被喷了一脸！', type: ShellType.SHELL_MILK }
 ];
 
-export async function renderShotgunImage(shells: ShellType[], avatarUrl?: string, useShotTemplate: boolean = false): Promise<Buffer> {
+export async function renderShotgunImage(puppeteer: Puppeteer, shells: ShellType[], avatarUrl?: string, useShotTemplate: boolean = false): Promise<Buffer> {
   const htmlFileName = useShotTemplate ? 'shotgun_shot.html' : 'shotgun.html';
   const htmlPath = join(__dirname, '..', 'html', htmlFileName);
   let htmlContent = readFileSync(htmlPath, 'utf-8');
@@ -70,15 +68,15 @@ export async function renderShotgunImage(shells: ShellType[], avatarUrl?: string
 
   const tempFileUrl = 'file://' + tempHtmlPath.replace(/\\/g, '/');
 
-  const browser = await firefox.launch({ headless: true });
-  const page = await browser.newPage();
-  await page.setViewportSize({ width: 640, height: 300 });
-
+  const page = await  puppeteer.browser.newPage();
+  const viewport = page.viewport();
+  viewport.width = 640;
+  viewport.height = 300;
   await page.goto(tempFileUrl);
-  await page.waitForLoadState('networkidle');
+  await page.waitForNetworkIdle();
 
   const screenshot = await page.screenshot({ type: 'png' });
-  await browser.close();
+  await puppeteer.browser.close();
 
   unlinkSync(tempHtmlPath);
 

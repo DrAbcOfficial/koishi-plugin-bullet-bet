@@ -1,13 +1,18 @@
 {
   "name": "koishi-plugin-bullet-bet",
   "description": "俄罗斯轮盘或恶魔霰弹游戏",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "files": [
     "lib",
-    "dist"
+    "dist",
+    "html"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DrAbcOfficial/koishi-plugin-bullet-bet"
+  },
   "license": "MIT",
   "scripts": {},
   "keywords": [
@@ -16,9 +21,7 @@
     "plugin"
   ],
   "peerDependencies": {
-    "koishi": "^4.18.7"
-  },
-  "dependencies": {
-    "playwright": "^1.58.0"
+    "koishi": "^4.18.10",
+    "koishi-plugin-puppeteer": "^3.9.0"
   }
 }
