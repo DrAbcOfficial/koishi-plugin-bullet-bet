@@ -105,7 +105,9 @@ export function registerShotgunCommand(ctx: Context, config: Config) {
             temp += '枪内没有子弹了，本轮游戏结束';
           }
           pickedShell = result;
-          image = await renderShotgunImage(ctx.puppeteer, [result], session.author.avatar, true);
+          // 仅MILK类型启动avatar元素
+          const avatarUrl = result === ShellType.SHELL_MILK ? session.author.avatar : undefined;
+          image = await renderShotgunImage(ctx.puppeteer, [result], avatarUrl, true);
         }
       }
 
